@@ -201,6 +201,17 @@ describe('Simple base routes', () => {
       .expect(200);
   });
 
+  it('/GET ?filter=id||in||test string with, the comma,another string (200)', () => {
+    const inValue = [
+      'test string with, the comma',
+      'another string',
+    ].join(',');
+
+    return request(server)
+      .get(`/companies?filter=id||in||${inValue}`)
+      .expect(200);
+  });
+
   it('/GET ?filter=foo||in||1,2,3 (400)', () => {
     return request(server)
       .get('/companies?filter=foo||in||1,2,3')
