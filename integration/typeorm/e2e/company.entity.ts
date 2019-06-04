@@ -39,7 +39,4 @@ export class Company extends BaseEntity {
 
   @OneToMany((type) => Project, (p) => p.company)
   projects: Project[];
-
-  @OneToMany((type) => Task, (t) => t.company)
-  tasks: Task[];
 }

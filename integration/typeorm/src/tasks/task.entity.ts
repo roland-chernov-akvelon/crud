@@ -26,9 +26,6 @@ export class Task extends BaseEntity {
    * Relations
    */
 
-  @ManyToOne((type) => Company, (c) => c.tasks)
-  company: Company;
-
   @ManyToOne((type) => Project, (c) => c.tasks)
   project: Project;
 
