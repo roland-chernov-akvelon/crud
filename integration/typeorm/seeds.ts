@@ -59,10 +59,29 @@ export class Seeds1544303473346 implements MigrationInterface {
       ('fericapozzati7@k3zaraxg9t7e1f.ml', '9c81f2857e8f', false, 1, 19),
       ('os.s.l.ka@6-6-6.cf', '9c81f2857e8f', false, 1, 20);
     `);
+
+    // projects
+    await queryRunner.query(`
+      INSERT INTO public.projects ("name", "description", "companyId") VALUES
+      ('@nestjsx/crud', 'NestJs CRUD for RESTful APIs', 1);
+    `);
+
+    // tasks
+    await queryRunner.query(`
+      INSERT INTO public.tasks ("name", "status", "projectId", "userId") VALUES
+      ('Send an e-mail to Susan', 'In progress', 1, 1, 1),
+      ('Implement an integration test to demonstrate #87', 'Done', 1, 1, 2);
+    `);
   }
 
   public async down(queryRunner: QueryRunner): Promise<any> {
     // flush
+    await queryRunner.query(
+      `DELETE FROM public.tasks; ALTER SEQUENCE tasks_id_seq RESTART WITH 1;`,
+    );
+    await queryRunner.query(
+      `DELETE FROM public.projects; ALTER SEQUENCE projects_id_seq RESTART WITH 1;`,
+    );
     await queryRunner.query(
       `DELETE FROM public.users; ALTER SEQUENCE users_id_seq RESTART WITH 1;`,
     );
