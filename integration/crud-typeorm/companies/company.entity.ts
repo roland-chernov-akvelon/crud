@@ -6,7 +6,6 @@ import { CrudValidationGroups } from '@nestjsx/crud';
 import { BaseEntity } from '../base-entity';
 import { User } from '../users/user.entity';
 import { Project } from '../projects/project.entity';
-import { Task } from '../tasks/task.entity';
 
 const { CREATE, UPDATE } = CrudValidationGroups;
 
@@ -41,7 +40,4 @@ export class Company extends BaseEntity {
 
   @OneToMany((type) => Project, (p) => p.company)
   projects: Project[];
-
-  @OneToMany(() => Task, (t) => t.company)
-  tasks: Task[];
 }

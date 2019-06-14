@@ -2,7 +2,6 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 
 import { BaseEntity } from '../base-entity';
 import { User } from '../users/user.entity';
-import { Company } from '../companies/company.entity';
 import { Project } from '../projects/project.entity';
 
 @Entity('tasks')
@@ -25,9 +24,6 @@ export class Task extends BaseEntity {
   /**
    * Relations
    */
-
-  @ManyToOne(() => Company, o => o.tasks)
-  company: Company;
 
   @ManyToOne(() => Project, o => o.tasks)
   project: Project;
