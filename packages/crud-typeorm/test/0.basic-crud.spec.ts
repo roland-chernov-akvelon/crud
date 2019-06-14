@@ -9,11 +9,10 @@ import { Crud } from '../../crud/src/decorators/crud.decorator';
 import { HttpExceptionFilter } from '../../../integration/shared/https-exception.filter';
 import { withCache } from '../../../integration/crud-typeorm/orm.config';
 import { Company } from '../../../integration/crud-typeorm/companies';
-import { Project } from '../../../integration/crud-typeorm/projects';
 import { User } from '../../../integration/crud-typeorm/users';
-import { UserProfile } from '../../../integration/crud-typeorm/users-profiles';
 import { CompaniesService } from './__fixture__/companies.service';
 import { UsersService } from './__fixture__/users.service';
+import { Entities } from './__fixture__/constants';
 
 describe('#crud-typeorm', () => {
   describe('#basic crud', () => {
@@ -27,7 +26,8 @@ describe('#crud-typeorm', () => {
     })
     @Controller('companies')
     class CompaniesController {
-      constructor(public service: CompaniesService) {}
+      constructor(public service: CompaniesService) {
+      }
     }
 
     @Crud({
@@ -58,14 +58,15 @@ describe('#crud-typeorm', () => {
     })
     @Controller('companies/:companyId/users')
     class UsersController {
-      constructor(public service: UsersService) {}
+      constructor(public service: UsersService) {
+      }
     }
 
     beforeAll(async () => {
       const fixture = await Test.createTestingModule({
         imports: [
           TypeOrmModule.forRoot(withCache),
-          TypeOrmModule.forFeature([Company, Project, User, UserProfile]),
+          TypeOrmModule.forFeature(Entities),
         ],
         controllers: [CompaniesController, UsersController],
         providers: [

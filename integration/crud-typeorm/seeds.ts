@@ -91,6 +91,39 @@ export class Seeds1544303473346 implements MigrationInterface {
       ('19@email.com', false, 2, 19),
       ('20@email.com', false, 2, 20);
     `);
+
+    // tasks
+    await queryRunner.query(`
+    INSERT INTO public.tasks ("name", "status", "companyId", "projectId", "userId")
+    VALUES ('task11', 'a', 1, 1, 1),
+           ('task12', 'a', 1, 1, 1),
+           ('task13', 'a', 1, 1, 1),
+           ('task14', 'a', 1, 1, 1),
+           ('task21', 'a', 1, 2, 2),
+           ('task22', 'a', 1, 2, 2),
+           ('task23', 'a', 1, 2, 2),
+           ('task24', 'a', 1, 2, 2),
+           ('task31', 'a', 1, 3, 3),
+           ('task32', 'a', 1, 3, 3),
+           ('task33', 'a', 1, 3, 3),
+           ('task34', 'a', 1, 3, 3),
+           ('task41', 'a', 1, 4, 4),
+           ('task42', 'a', 1, 4, 4),
+           ('task43', 'a', 1, 4, 4),
+           ('task44', 'a', 1, 4, 4),
+           ('task1', 'a', 1, 1, 5),
+           ('task2', 'a', 1, 1, 5),
+           ('task3', 'a', 1, 1, 5),
+           ('task4', 'a', 1, 1, 5),
+           ('task1', 'a', 1, 1, 6),
+           ('task2', 'a', 1, 1, 6),
+           ('task3', 'a', 1, 1, 6),
+           ('task4', 'a', 1, 1, 6),
+           ('task1', 'a', 1, 1, 7),
+           ('task2', 'a', 1, 1, 7),
+           ('task3', 'a', 1, 1, 7),
+           ('task4', 'a', 1, 1, 7);
+    `);
   }
 
   public async down(queryRunner: QueryRunner): Promise<any> {}

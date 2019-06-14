@@ -1,17 +1,11 @@
-import { Entity, Column, ManyToOne, ManyToMany, JoinTable } from 'typeorm';
-import {
-  IsOptional,
-  IsString,
-  IsNumber,
-  MaxLength,
-  IsDefined,
-  IsBoolean,
-} from 'class-validator';
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
+import { IsBoolean, IsDefined, IsNumber, IsOptional, IsString, MaxLength } from 'class-validator';
 import { CrudValidationGroups } from '@nestjsx/crud';
 
 import { BaseEntity } from '../base-entity';
 import { Company } from '../companies/company.entity';
 import { User } from '../users/user.entity';
+import { Task } from '../tasks/task.entity';
 
 const { CREATE, UPDATE } = CrudValidationGroups;
 
@@ -48,4 +42,7 @@ export class Project extends BaseEntity {
   @ManyToMany((type) => User, (u) => u.projects, { cascade: true })
   @JoinTable()
   users?: User[];
+
+  @OneToMany((type) => Task, (t) => t.project)
+  tasks?: Task[];
 }
